@@ -62,7 +62,7 @@ console.log(jsmlString);
 
 This will print:
 
-```
+``` javascript
 [ { title: 'Hello World',
     date: '2012-08-09',
     tags: [ 'hello world', 'misc' ] },
@@ -73,7 +73,7 @@ This will print:
 
 for the parsed string and the following for the strigified array:
 
-```
+``` javascript
 "title": "Hello World",
 "date": "2012-08-09",
 "tags": [
