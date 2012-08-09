@@ -1,8 +1,12 @@
 {
   "name": "jsml",
   "description": "JSON-like markup alternative that omits the surrounding braces",
-  "tags": ["json", "yaml", "markup language"],
-  "version": "0.0.0",
+  "tags": [
+    "json",
+    "yaml",
+    "markup language"
+  ],
+  "version": "0.0.1",
   "author": "Paul Vorbach <paul@vorb.de> (http://paul.vorba.ch/)",
   "repository": {
     "type": "git",
