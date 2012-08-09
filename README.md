@@ -3,6 +3,91 @@ JSML
 
 JSON-like markup alternative that omits the surrounding braces
 
+Example
+-------
+
+Here’s an example document, that defines metadata for serveral articles:
+
+``` javascript
+"title": "Hello World",
+"date":  "2012-08-09",
+"tags":  [ "hello world", "misc" ]
+---
+"title": "The second article",
+"date":  "2012-08-10",
+"tags":  [ "misc" ]
+```
+
+Installation
+------------
+
+```
+npm install jsml
+```
+
+or
+
+```
+ender build jsml
+```
+
+Usage
+-----
+
+You can use JSML just like [JSON](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/JSON):
+
+``` javascript
+var JSML = require('jsml');
+
+var jsmlDocument = '"title": "Hello World",\n'
+                 + '"date":  "2012-08-09",\n'
+                 + '"tags":  [ "hello world", "misc" ]\n'
+                 + '---\n'
+                 + '"title": "The second article",\n'
+                 + '"date":  "2012-08-10",\n'
+                 + '"tags":  [ "misc" ]';
+
+// Parse a string
+
+var doc = JSML.parse(jsmlDocument);
+
+console.log(doc);
+
+// Stringify an Object or an Array of Objects
+
+var jsmlString = JSML.stringify(doc, null, '  ');
+
+console.log(jsmlString);
+```
+
+This will print:
+
+```
+[ { title: 'Hello World',
+    date: '2012-08-09',
+    tags: [ 'hello world', 'misc' ] },
+  { title: 'The second article',
+    date: '2012-08-10',
+    tags: [ 'misc' ] } ]
+```
+
+for the parsed string and the following for the strigified array:
+
+```
+"title": "Hello World",
+"date": "2012-08-09",
+"tags": [
+  "hello world",
+  "misc"
+]
+---
+"title": "The second article",
+"date": "2012-08-10",
+"tags": [
+  "misc"
+]
+```
+
 Bugs and Issues
 ---------------
 

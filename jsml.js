@@ -28,7 +28,8 @@
       return result.join('\n---\n');
     } else {
       var json = JSON.stringify(doc, replacer, space);
-      return json.substring(1, json.length - 1);
+      return json.substring(1, json.length - 1)
+        .replace(new RegExp('\n'+space, 'g'), '\n').trim();
     }
   };
 })();
