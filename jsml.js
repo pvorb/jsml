@@ -4,32 +4,29 @@
   var JSML = module.exports = {};
   var objSeparator = /\r?\n---+\r?\n/;
 
+  // parses a JSML document string
   JSML.parse = function (docstr) {
     var doc = docstr.split(objSeparator);
     var len = doc.length;
     var result = new Array(len);
-    for (var i = 0; i < len; i++) {
-      result[i] = JSON.parse('{' + doc[i] + '}');
-    }
+
+    for (var i = 0; i < len; i++)
+      result[i] = JSON.parse(doc[i]);
+
     return result;
   };
 
+  // returns the string representation of a value or a list of values
   JSML.stringify = function (doc, replacer, space) {
-    if (typeof doc != 'object')
-      throw new Error('Argument has to be either an Object or an Array of '
-        + 'Objects.');
+    if (typeof doc != 'object' || !(doc instanceof Array))
+      return JSON.stringify(doc, replacer, space);
 
-    if (doc instanceof Array) {
-      var len = doc.length;
-      var result = new Array(len);
-      for (var i = 0; i < len; i++) {
-        result[i] = JSML.stringify(doc[i], replacer, space);
-      }
-      return result.join('\n---\n');
-    } else {
-      var json = JSON.stringify(doc, replacer, space);
-      return json.substring(1, json.length - 1)
-        .replace(new RegExp('\n'+space, 'g'), '\n').trim();
-    }
+    var len = doc.length;
+    var result = new Array(len);
+
+    for (var i = 0; i < len; i++)
+      result[i] = JSON.stringify(doc[i], replacer, space);
+
+    return result.join('\n---\n');
   };
 })();

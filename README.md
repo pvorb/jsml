@@ -1,22 +1,51 @@
 JSML
 ====
 
-JSON-like markup alternative that omits the surrounding braces
+Appendable sequences of JSON documents
+
+There’s an issue with JSON that I can’t tolerate: If you want to add a new
+object to a JSON document, you have to rewrite the whole document. That makes it
+inappropriate for logging an similar tasks. This is where JSML pitches in.
 
 Example
 -------
 
-Here’s an example document, that defines metadata for serveral articles:
+Here’s an example document that defines metadata for serveral articles:
 
 ``` javascript
-"title": "Hello World",
-"date":  "2012-08-09",
-"tags":  [ "hello world", "misc" ]
+{
+  "title": "Hello World",
+  "date":  "2012-08-09",
+  "tags":  [ "hello world", "misc" ]
+}
 ---
-"title": "The second article",
-"date":  "2012-08-10",
-"tags":  [ "misc" ]
+{
+  "title": "The second article",
+  "date":  "2012-08-10",
+  "tags":  [ "misc" ]
+}
 ```
+
+Note that each object is a normal JSON representation of a JavaScript object.
+In JSON itself, the same document would look like this:
+
+``` javascript
+[
+  {
+    "title": "Hello World",
+    "date": "2012-08-09",
+    "tags": [ "hello world", "misc" ]
+  },
+  {
+    "title": "The second article",
+    "date":  "2012-08-10",
+    "tags":  [ "misc" ]
+  }
+]
+```
+
+So the only difference from a usual JSON document is, that objects in top level
+arrays are separated by `---` on a distinct line.
 
 Installation
 ------------
@@ -39,13 +68,13 @@ You can use JSML just like [JSON](https://developer.mozilla.org/en-US/docs/JavaS
 ``` javascript
 var JSML = require('jsml');
 
-var jsmlDocument = '"title": "Hello World",\n'
+var jsmlDocument = '{ "title": "Hello World",\n'
                  + '"date":  "2012-08-09",\n'
-                 + '"tags":  [ "hello world", "misc" ]\n'
+                 + '"tags":  [ "hello world", "misc" ] }\n'
                  + '---\n'
-                 + '"title": "The second article",\n'
+                 + '{ "title": "The second article",\n'
                  + '"date":  "2012-08-10",\n'
-                 + '"tags":  [ "misc" ]';
+                 + '"tags":  [ "misc" ] }\n';
 
 // Parse a string
 
@@ -71,21 +100,25 @@ This will print:
     tags: [ 'misc' ] } ]
 ```
 
-for the parsed string and the following for the strigified array:
+for the parsed string and the following for the _stringified_ array:
 
 ```
-"title": "Hello World",
-"date": "2012-08-09",
-"tags": [
-  "hello world",
-  "misc"
-]
+{
+  "title": "Hello World",
+  "date": "2012-08-09",
+  "tags": [
+    "hello world",
+    "misc"
+  ]
+}
 ---
-"title": "The second article",
-"date": "2012-08-10",
-"tags": [
-  "misc"
-]
+{
+  "title": "The second article",
+  "date": "2012-08-10",
+  "tags": [
+    "misc"
+  ]
+}
 ```
 
 Bugs and Issues

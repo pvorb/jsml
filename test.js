@@ -1,8 +1,14 @@
 var JSML = require('./jsml.js');
 
-var doc = '"hi": "there"\n---\n"i\'m": "jsml!"';
+console.log('\nparse:\n');
 
-var jsml = JSML.parse(doc);
+console.log(JSML.parse('{}'));
+console.log(JSML.parse('[]'));
+console.log(JSML.parse('true'));
+
+var jsml = JSML.parse('{"hi": "there"}\n---\n{"i\'m": "jsml!"}');
 console.log(jsml);
+
+console.log('\nstringify:\n');
 
 console.log(JSML.stringify(jsml));
