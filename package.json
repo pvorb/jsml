@@ -1,6 +1,6 @@
 {
   "name": "jsml",
-  "description": "JSON-like markup alternative that omits the surrounding braces",
+  "description": "Appendable sequences of JSON documents",
   "tags": [
     "json",
     "yaml",

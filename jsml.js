@@ -3,6 +3,8 @@
 
   var JSML = module.exports = {};
   var objSeparator = /\r?\n---+\r?\n/;
+  var leader = /^---+/;
+  var follower = /---+$/;
 
   // parses a JSML document string
   JSML.parse = function (docstr) {
@@ -11,7 +13,7 @@
     var result = new Array(len);
 
     for (var i = 0; i < len; i++)
-      result[i] = JSON.parse(doc[i]);
+      result[i] = JSON.parse(doc[i].replace(leader, '').replace(follower, ''));
 
     return result;
   };
